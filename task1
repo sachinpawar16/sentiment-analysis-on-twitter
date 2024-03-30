@@ -1,0 +1,39 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv("E:/week 2/archive/test.csv")  # Replace 'your_dataset.csv' with your actual dataset file path
+
+# Explore the dataset
+print("First 5 rows of the dataset:")
+print(df.head())
+
+print("\nInformation about the dataset:")
+print(df.info())
+
+print("\nSummary statistics of numerical columns:")
+print(df.describe())
+
+print("\nMissing values in the dataset:")
+print(df.isnull().sum())
+
+# Visualize important features using Seaborn
+# Example: Pairplot
+sns.pairplot(df)
+plt.title('Pairplot of Important Features')
+plt.show()
+
+# Example: Heatmap of Correlation Matrix
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Heatmap of Correlation Matrix')
+plt.show()
+
+# Example: Distribution plot of a numerical feature
+plt.figure(figsize=(8, 6))
+sns.histplot(df['numerical_feature'], kde=True, bins=30, color='skyblue')
+plt.title('Distribution of Numerical Feature')
+plt.xlabel('Numerical Feature')
+plt.ylabel('Frequency')
+plt.show()
