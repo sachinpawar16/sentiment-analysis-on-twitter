@@ -1,0 +1,50 @@
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import RegexpTokenizer
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+# Sample text dataset
+text_data = [
+    "I love to eat pizza and burgers.",
+    "She enjoys hiking in the mountains.",
+    "They were playing football in the park."
+]
+
+# Tokenization using regexp tokenizer
+tokenizer = RegexpTokenizer(r'\w+')
+tokenized_text = [tokenizer.tokenize(text.lower()) for text in text_data]
+
+# Stopwords removal
+stop_words = set(stopwords.words('english'))
+filtered_text = [[word for word in tokens if word not in stop_words] for tokens in tokenized_text]
+
+# Stemming using Porter Stemmer
+porter_stemmer = PorterStemmer()
+stemmed_text = [[porter_stemmer.stem(word) for word in tokens] for tokens in filtered_text]
+
+# Lemmatization using WordNet Lemmatizer
+wordnet_lemmatizer = WordNetLemmatizer()
+lemmatized_text = [[wordnet_lemmatizer.lemmatize(word) for word in tokens] for tokens in filtered_text]
+
+print("Original Text:")
+for text in text_data:
+    print(text)
+
+print("\nTokenized Text:")
+for tokens in tokenized_text:
+    print(tokens)
+
+print("\nFiltered Text (Stopwords Removal):")
+for tokens in filtered_text:
+    print(tokens)
+
+print("\nStemmed Text:")
+for tokens in stemmed_text:
+    print(tokens)
+
+print("\nLemmatized Text:")
+for tokens in lemmatized_text:
+    print(tokens)
